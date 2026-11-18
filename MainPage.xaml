@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"        
+             Title=""
+             BackgroundColor="White"
+             x:Class="tutorial_demo_2.MainPage">
+
+    <ScrollView >
+        <Grid BackgroundColor="white">
+            <!-- Rotated Background Rectangle -->
+            <BoxView  
+                Color="#fff"
+                WidthRequest="700"
+                HeightRequest="500"
+                Rotation="0"
+                CornerRadius="100"
+                HorizontalOptions="Center"
+                >
+            </BoxView>
+
+            <!-- Main Content -->
+            <VerticalStackLayout
+            x:Name="MainLayout"
+
+            HorizontalOptions="Fill"
+                VerticalOptions="Center"
+            Padding="30,0"
+            Spacing="25">
+
+
+                <skia:SKLottieView
+                Source="Animation1.json"
+                RepeatCount="-1"
+                HorizontalOptions="Fill"
+                VerticalOptions="Center"
+                HeightRequest="200"
+                Margin="0,0,0,10"
+                WidthRequest="1000" />
+
+
+                <Label
+                Text="Clock in with confidence"
+                   TextColor="#333"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2" />
+                <Label
+                Text=" just take a  📷 !"
+                TextColor="#333"
+                Style="{StaticResource SubHeadline}"
+                FontAttributes="Italic"
+                SemanticProperties.HeadingLevel="Level3" />
+
+                <Label
+                    Text="--- WELCOME TO OM SAI SERVICES ---"
+                    TextColor="maroon"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    Margin="0,200,0,0"
+                    SemanticProperties.HeadingLevel="Level1" />
+
+            </VerticalStackLayout>
+                    
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>

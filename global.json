@@ -1,0 +1,23 @@
+{
+  "sdk": {
+    "version": "10.0.404",
+    "rollForward": "disable",
+    "allowPrerelease": false
+  }
+}
+
+//{
+//  "sdk": {
+//    "version": "11.0.100-rc.3.26522.148",
+//    "rollForward": "disable",
+//    "allowPrerelease": true
+//  }
+//}
+
+
+//{
+//    "sdk": {
+//        "version": "10.0.401",
+//        "rollForward": "disable"
+//    }
+//}

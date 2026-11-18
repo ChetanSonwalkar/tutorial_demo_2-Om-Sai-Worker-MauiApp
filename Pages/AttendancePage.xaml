@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    x:Class="tutorial_demo_2.Pages.AttendancePage"
+    Title="📝 Attendance">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+        Text="History"
+        Order="Primary"
+        Priority="0"
+        Command="{Binding NavigateToAttendanceHistoryCommand}" />
+
+        <ToolbarItem
+        Text="Back"
+        Order="Primary"
+        Priority="1"
+        Clicked="BackButton_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Grid>
+            <VerticalStackLayout
+                Spacing="10"
+                Padding="20">
+
+                <Grid
+                    RowDefinitions="Auto"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10">
+
+                    <Frame
+                        Grid.Column="0"
+                        BackgroundColor="#87CEEB"
+                        CornerRadius="10"
+                        Padding="15"
+                        HasShadow="True">
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label
+                                Text="{Binding SelectedSite}"
+                                FontSize="16"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center" />
+
+                            <Label
+                                Text="{Binding SiteAddress}"
+                                FontSize="14"
+                                TextColor="White"
+                                HorizontalOptions="Start" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame
+                        Grid.Column="1"
+                        BackgroundColor="#87CEEB"
+                        CornerRadius="10"
+                        Padding="15"
+                        HasShadow="True">
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label
+                                Text="Current Location"
+                                FontSize="16"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center" />
+
+                            <Label
+                                Text="{Binding CurrentAddress}"
+                                FontSize="14"
+                                TextColor="White"
+                                HorizontalOptions="End" />
+
+                            <ActivityIndicator
+                                IsRunning="{Binding IsLocationLoading}"
+                                IsVisible="{Binding IsLocationLoading}"
+                                Color="White"
+                                HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <Frame
+                    BackgroundColor="{Binding LiveDistanceBackground}"
+                    CornerRadius="10"
+                    Padding="15"
+                    HasShadow="True">
+
+                    <Grid ColumnDefinitions=".6*,.4*">
+                        <Label
+                            Text="Site Distance (In Meters)"
+                            Grid.Column="0"
+                            FontSize="16"
+                            TextColor="#333333"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center" />
+
+                        <Label
+                            Text="{Binding LiveDistance, StringFormat='{0:F2}'}"
+                            Grid.Column="1"
+                            FontSize="16"
+                            TextColor="#333333"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center" />
+                    </Grid>
+                </Frame>
+
+                <Frame
+                    BackgroundColor="White"
+                    CornerRadius="20"
+                    Padding="10"
+                    IsVisible="{Binding ShowClock}"
+                    HasShadow="True">
+
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,*">
+
+                            <Grid
+                                Grid.Column="0"
+                                RowDefinitions="Auto,Auto"
+                                Padding="0,0,30,0">
+
+                                <Label
+                                    Grid.Row="0"
+                                    Text="{Binding WorkingHours}"
+                                    FontSize="30"
+                                    TextColor="#1E1E1E"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Text="{Binding CurrentDate}"
+                                    FontSize="16"
+                                    TextColor="#A0A0A0"
+                                    HorizontalOptions="Center" />
+                            </Grid>
+
+                            <Grid
+                                Grid.Column="1"
+                                RowDefinitions="Auto,Auto"
+                                Padding="5">
+
+                                <Grid
+                                    Grid.Row="0"
+                                    ColumnDefinitions=".4*,.6*">
+
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="IN"
+                                        FontSize="16"
+                                        TextColor="#FFA0A0" />
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding InTime}"
+                                        FontSize="16"
+                                        TextColor="#FFA0A0" />
+                                </Grid>
+
+                                <Grid
+                                    Grid.Row="1"
+                                    ColumnDefinitions=".4*,.6*">
+
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="OUT"
+                                        FontSize="16"
+                                        TextColor="#A0DDA0" />
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding OutTime}"
+                                        FontSize="16"
+                                        TextColor="#A0DDA0" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="Blue"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    HorizontalOptions="Center" />
+
+                <Frame
+                    BackgroundColor="#E0F7FF"
+                    IsVisible="{Binding ShowCaptureButton}"
+                    CornerRadius="10"
+                    VerticalOptions="Center"
+                    Padding="15"
+                    HeightRequest="230"
+                    HasShadow="True">
+
+                    <Grid>
+                        <skia:SKLottieView
+                            Source="Animation1.json"
+                            RepeatCount="-1"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Start"
+                            HeightRequest="130"
+                            Margin="0,0,0,10"
+                            WidthRequest="1000" />
+
+                        <Button
+                            Text="Selfie Attendance"
+                            BackgroundColor="#87CE00"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="End"
+                            CornerRadius="10"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Padding="20,10"
+                            Command="{Binding NavigateToSelfiePageCommand}" />
+                    </Grid>
+                </Frame>
+
+                <Button
+                    Text="Worker Attendance"
+                    BackgroundColor="#D7BB00"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="End"
+                    CornerRadius="10"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    Padding="20,10"
+                    IsVisible="{Binding ShowWorkerListButton}"
+                    Command="{Binding NavigateToWorkerListCommand}" />
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

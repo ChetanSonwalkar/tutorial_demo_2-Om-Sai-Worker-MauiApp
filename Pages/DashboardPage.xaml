@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tutorial_demo_2.Pages.DashboardPage"
+             Shell.FlyoutItemIsVisible="True"
+             Title="🏠 Home">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="🔑 Change Password" Order="Primary" Priority="0" Command="{Binding NavigateToChangePasswordCommand}"  />
+        <ToolbarItem Text="➡️ Logout" Order="Primary" Priority="0" Command="{Binding LogoutCommand}" />
+
+     </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*">
+
+        
+        <!-- Fixed (Non-Scrollable) Header -->
+        <Grid RowDefinitions="Auto,Auto"  Grid.Row="0" >
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4682B4" Offset="0.0" />
+
+                    <GradientStop Color="#87CEFA" Offset="0.5" />
+                    <!-- LightSkyBlue -->
+                    <GradientStop Color="#4682B4" Offset="1.0" />
+                    <!-- SteelBlue -->
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.Shadow>
+                <Shadow Brush="Black"
+                    Opacity="0.5"
+                    Offset="5,5"
+                    Radius="45"/>
+            </Grid.Shadow>
+
+            <Grid Grid.Row="0" HorizontalOptions="Center">
+
+                <Frame Margin="0,30,0,20"
+                   HeightRequest="90"
+                   WidthRequest="90"
+                   CornerRadius="45"
+                   Padding="0"
+                   IsClippedToBounds="True"
+                   BorderColor="white"
+                   HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Opacity="0.5" Offset="5,5" Radius="45"/>
+                    </Frame.Shadow>
+                    <Image 
+        x:Name="userImage"
+        Source="{Binding UserImage}"
+        Aspect="AspectFill">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer 
+                Command="{Binding NavigateToChangeProfileImageCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+            </Grid>
+
+            <Grid Grid.Row="1" HorizontalOptions="Center" Margin="0,0,0,20">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                    <Label x:Name="userName"
+                           Text="{Binding Worker.FullName}"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Label x:Name="workerId"
+                           Text="{Binding Worker.WorkmanId}"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="14"
+                           TextColor="#EEEEEE"/>
+                    <Label x:Name="department"
+                           Text="{Binding Worker.DepartmentName}"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="18"
+                           TextColor="white"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+
+        <!-- Scrollable Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="10" Padding="20">
+
+                <!-- Personal Information -->
+                <Frame BackgroundColor="White"
+                       CornerRadius="15"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Personal Information"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#333333"/>
+
+                        <Grid RowSpacing="10" ColumnSpacing="15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Phone -->
+                            <Label Grid.Row="0" Grid.Column="0" Text="Phone:" VerticalOptions="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1" x:Name="phoneLabel" Text="{Binding Worker.MobileNumbers}" TextColor="#333333" VerticalOptions="Center"/>
+
+                            <!-- Date of Birth -->
+                            <Label Grid.Row="1" Grid.Column="0" Text="Date of Birth:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" x:Name="dobLabel" Text="{Binding Worker.FormattedDateofBirth}" TextColor="#333333" VerticalOptions="Center"/>
+
+                            <!-- Age -->
+                            <Label Grid.Row="2" Grid.Column="0" Text="Age:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Row="2" Grid.Column="1" x:Name="ageLabel" Text="{Binding Worker.Age}" TextColor="#333333" VerticalOptions="Center"/>
+
+                            <!-- Gender -->
+                            <Label Grid.Row="3" Grid.Column="0" Text="Gender:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Row="3" Grid.Column="1" x:Name="genderLabel" Text="{Binding Worker.Gender}" TextColor="#333333" VerticalOptions="Center"/>
+
+                            <!-- Marital Status -->
+                            <Label Grid.Row="4" Grid.Column="0" Text="Marital Status:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Row="4" Grid.Column="1" x:Name="maritalStatusLabel" Text="{Binding Worker.MarritalStatus}" TextColor="#333333" VerticalOptions="Center"/>
+
+                            <!-- Spouse Name -->
+                            <Label Grid.Row="5" Grid.Column="0" Text="Spouse Name:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Row="5" Grid.Column="1" x:Name="spouseNameLabel" Text="{Binding Worker.SpouseName}" TextColor="#333333" VerticalOptions="Center"/>
+
+                            <!-- Joining Date -->
+                            <Label Grid.Row="6" Grid.Column="0" Text="Joining Date:" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <Label Grid.Row="6" Grid.Column="1" x:Name="joiningDateLabel" Text="{Binding Worker.FormattedDateofJoining}" TextColor="#333333" VerticalOptions="Center"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Address Section -->
+                <Frame Padding="15" Margin="0,0,0,10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Address Information" FontSize="18" FontAttributes="Bold" TextColor="#333333"/>
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Permanent Address" FontAttributes="Bold" TextColor="Gray"/>
+                            <Label Text="{Binding Address.PermanentAddress, TargetNullValue='Not Provided'}" TextColor="Black"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Current Address" FontAttributes="Bold" TextColor="Gray" />
+                            <Label Text="{Binding Address.CurrentAddress, TargetNullValue='Not Provided'}" TextColor="Black"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Documents Section -->
+                <Frame  Padding="15" Margin="0,0,0,10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Documents" FontSize="18" FontAttributes="Bold" TextColor="#333333"/>
+
+                        <CollectionView x:Name="documentsCollectionView" ItemsSource="{Binding Documents}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="5" ColumnDefinitions="*,Auto">
+                                        <Label Grid.Column="0" Text="{Binding DocumentName}"/>
+                                        <Label Grid.Column="1" Text="{Binding Status}" TextColor="{Binding StatusColor}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+
+</ContentPage>

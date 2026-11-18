@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="tutorial_demo_2.Pages.ChangeProfileImagePage"
+    Title="Update Profile Picture"
+    BackgroundColor="#F2F7FD">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#DCEEFF" Offset="0"/>
+                <GradientStop Color="#F2F7FD" Offset="0.6"/>
+                <GradientStop Color="#FFFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="15,22"
+                Spacing="18"
+                VerticalOptions="Center">
+
+                <VerticalStackLayout
+                    Spacing="7"
+                    HorizontalOptions="Center">
+
+                    <Label
+                        Text="Update Profile Picture"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        TextColor="#173B70"
+                        HorizontalOptions="Center"/>
+
+                    <Label
+                        Text="Choose a new photo for your profile"
+                        FontSize="13"
+                        TextColor="#8492A6"
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#E0EAF5"
+                    StrokeThickness="1"
+                    Padding="20">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="24"/>
+                    </Border.StrokeShape>
+
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="#243B5A"
+                            Offset="0,5"
+                            Radius="14"
+                            Opacity="0.12"/>
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="20">
+
+                        <Border
+                            WidthRequest="210"
+                            HeightRequest="210"
+                            Padding="5"
+                            BackgroundColor="#E7F1FF"
+                            Stroke="#B8D9FA"
+                            StrokeThickness="2"
+                            HorizontalOptions="Center">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="110"/>
+                            </Border.StrokeShape>
+
+                            <Image
+                                x:Name="ProfileImage"
+                                Source="logo.png"
+                                Aspect="AspectFill"/>
+                        </Border>
+
+                        <Label
+                            Text="Select Profile Photo"
+                            FontSize="19"
+                            FontAttributes="Bold"
+                            TextColor="#344B68"
+                            HorizontalOptions="Center"/>
+
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="12">
+
+                            <Button
+                                x:Name="TakePhotoButton"
+                                Grid.Column="0"
+                                Text="Take Photo"
+                                BackgroundColor="#E5F1FF"
+                                TextColor="#1678D3"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="52"
+                                Clicked="OnTakePhotoClicked"/>
+
+                            <Button
+                                x:Name="ChoosePhotoButton"
+                                Grid.Column="1"
+                                Text="Gallery"
+                                BackgroundColor="#E5F1FF"
+                                TextColor="#1678D3"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="52"
+                                Clicked="OnChoosePhotoClicked"/>
+                        </Grid>
+
+                        <Label
+                            Text="Supported formats: JPG, JPEG, PNG, WEBP"
+                            FontSize="12"
+                            TextColor="#8492A6"
+                            HorizontalTextAlignment="Center"/>
+
+                        <Button
+                            x:Name="UploadButton"
+                            Text="Upload Profile Photo"
+                            BackgroundColor="#1678D3"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="13"
+                            HeightRequest="55"
+                            IsEnabled="False"
+                            Clicked="OnUploadClicked"/>
+
+                        <ActivityIndicator
+                            x:Name="UploadIndicator"
+                            IsVisible="False"
+                            IsRunning="False"
+                            Color="#1678D3"
+                            HeightRequest="35"/>
+
+                        <Label
+                            x:Name="StatusLabel"
+                            Text=""
+                            FontSize="13"
+                            TextColor="#16834A"
+                            HorizontalTextAlignment="Center"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label
+                    Text="Keep your profile photo clear and up to date."
+                    FontSize="12"
+                    TextColor="#8492A6"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+    
+    <!--<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tutorial_demo_2.Pages.ChangeProfileImagePage"
+             Title="Update Profile Picture"
+             BackgroundColor="#F0F9FF">
+    --><!-- Light sky blue background --><!--
+
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="20"
+            Padding="20"
+            VerticalOptions="Center">
+
+            --><!-- Header --><!--
+            <Label 
+                Text="Update Your Profile Picture"
+                FontSize="24"
+                TextColor="#0077CC"  
+                HorizontalOptions="Center"
+                FontAttributes="Bold"/>
+
+                --><!-- Profile Image Container --><!--
+                <Frame 
+                HeightRequest="200"
+                WidthRequest="200"
+                CornerRadius="100"
+                HorizontalOptions="Center"
+                BackgroundColor="#E1F0FF"
+                    Padding="0"
+                HasShadow="True">
+
+                    <Image 
+                    x:Name="ProfileImage"
+                    Aspect="AspectFill"
+                    HeightRequest="200"
+                    WidthRequest="200"
+                    BackgroundColor="#E1F0FF"/>
+                </Frame>
+
+                --><!-- Action Buttons --><!--
+                <HorizontalStackLayout 
+                Spacing="15"
+                HorizontalOptions="Center">
+
+                    --><!--<Button 
+                    Text="Take Photo"
+                    BackgroundColor="#4DA8FF"  
+                        TextColor="White"
+                    CornerRadius="10"
+                    WidthRequest="120"
+                    Clicked="OnTakePhotoClicked"/>--><!--
+
+                        <Button 
+                    Text="Choose Photo"
+                    BackgroundColor="#4DA8FF"
+                    TextColor="White"
+                    CornerRadius="10"
+                    WidthRequest="150"
+                    Clicked="OnChoosePhotoClicked"/>
+                </HorizontalStackLayout>
+
+                --><!-- Upload Button --><!--
+                <Button 
+                Text="Upload Photo"
+                BackgroundColor="#0077CC"  
+                    TextColor="White"
+                CornerRadius="10"
+                HorizontalOptions="Fill"
+                Margin="0,20,0,0"
+                Clicked="OnUploadClicked"
+                IsEnabled="False"
+                x:Name="UploadButton"/>
+
+                    --><!-- Status Message --><!--
+                    <Label 
+                x:Name="StatusLabel"
+                TextColor="#0077CC"
+                HorizontalOptions="Center"
+                FontAttributes="Italic"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>-->

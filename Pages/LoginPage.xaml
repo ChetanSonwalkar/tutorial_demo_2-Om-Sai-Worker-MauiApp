@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    x:Class="tutorial_demo_2.Pages.LoginPage"
+    Title="LoginPage"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView VerticalOptions="Fill">
+        <Grid RowDefinitions="350,*">
+
+            <RoundRectangle
+                BackgroundColor="LightBlue"
+                WidthRequest="600"
+                HeightRequest="450"
+                Margin="0,-80,0,0"
+                CornerRadius="0,0,500,500" />
+
+            <VerticalStackLayout
+                Grid.Row="0"
+                Padding="30,0"
+                Margin="0,40,0,0"
+                Spacing="10"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+
+                <Image
+                    Source="logo.png"
+                    Aspect="AspectFit"
+                    WidthRequest="350"
+                    HeightRequest="320"
+                    HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Grid.Row="1"
+                Margin="0,25,0,0"
+                Padding="35,0"
+                Spacing="20">
+
+                <Grid ColumnDefinitions="60,*">
+
+                    <skia:SKLottieView
+                        Grid.Column="0"
+                        Source="user.json"
+                        RepeatCount="1"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                    <Entry
+                        Grid.Column="1"
+                        Text="{Binding LoginIdentifier}"
+                        FontSize="15"
+                        Placeholder="Workman ID"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+                <Grid ColumnDefinitions="60,*,Auto">
+
+                    <skia:SKLottieView
+                        Grid.Column="0"
+                        Source="password.json"
+                        RepeatCount="1"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                    <Entry
+                        Grid.Column="1"
+                        Text="{Binding Password}"
+                        FontSize="14"
+                        IsPassword="{Binding IsPasswordHidden}"
+                        Placeholder="Password"
+                        VerticalOptions="Center" />
+
+                    <Button
+                        Grid.Column="2"
+                        Text="{Binding PasswordVisibilityText}"
+                        Command="{Binding TogglePasswordCommand}"
+                        FontSize="12"
+                        Padding="8,5"
+                        BackgroundColor="Transparent"
+                        TextColor="Blue"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+                <!--<Grid ColumnDefinitions="Auto,*">
+
+                    <CheckBox
+                        Grid.Column="0"
+                        IsChecked="{Binding RememberMe}"
+                        Color="#2196F3"
+                        VerticalOptions="Center" />
+
+                    <Label
+                        Grid.Column="1"
+                        Text="Remember Me"
+                        FontSize="14"
+                        TextColor="#444444"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
+                <Label
+                    Text="{Binding ErrorMessage}"
+                    TextColor="Red"
+                    HorizontalOptions="Center" />
+
+                <ImageButton
+                    x:Name="LoginButton"
+                    Source="login1.png"
+                    WidthRequest="260"
+                    HeightRequest="65"
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ., Source={x:Reference LoginButton}}" />-->
+
+                <!--<Grid ColumnDefinitions="Auto,*"
+      ColumnSpacing="5"
+      Margin="0,0,0,2">
+
+                    <CheckBox
+                            Grid.Column="0"
+                            IsChecked="{Binding RememberMe}"
+                            Color="#2196F3"
+                            VerticalOptions="Center"
+                            Margin="0"
+                            HeightRequest="30"
+                            WidthRequest="30" />
+
+                    <Label
+                            Grid.Column="1"
+                            Text="Remember Me"
+                            FontSize="14"
+                            TextColor="#444444"
+                            VerticalOptions="Center" />
+
+                </Grid>-->
+
+                <Grid
+    ColumnDefinitions="Auto,*,Auto"
+    ColumnSpacing="5"
+    Margin="0,0,0,2">
+
+                    <CheckBox
+        Grid.Column="0"
+        IsChecked="{Binding RememberMe}"
+        Color="#2196F3"
+        VerticalOptions="Center"
+        Margin="0"
+        HeightRequest="30"
+        WidthRequest="30" />
+
+                    <Label
+        Grid.Column="1"
+        Text="Remember Me"
+        FontSize="13"
+        TextColor="#444444"
+        VerticalOptions="Center" />
+
+                    <Button
+        Grid.Column="2"
+        Text="Forgot Password?"
+        Command="{Binding ForgotPasswordCommand}"
+        FontSize="12"
+        FontAttributes="Bold"
+        TextColor="#1678D3"
+        BackgroundColor="Transparent"
+        Padding="5,0"
+        VerticalOptions="Center"
+        HeightRequest="35" />
+
+                </Grid>
+
+                <Label
+                        Text="{Binding ErrorMessage}"
+                        TextColor="Red"
+                        HorizontalOptions="Center"
+                        FontSize="12"
+                        Margin="0,-35,0,3" />
+
+                <ImageButton
+                        x:Name="LoginButton"
+                        Source="login1.png"
+                        WidthRequest="260"
+                        HeightRequest="65"
+                        Aspect="AspectFit"
+                        BackgroundColor="Transparent"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ., Source={x:Reference LoginButton}}"
+                        Margin="0" />
+
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="Blue" />
+
+                <Label
+                    Text="Version 3.0"
+                    HorizontalOptions="Center"
+                    TextColor="LightBlue"
+                    Margin="0,15,0,0" />
+
+                <Label
+                    Text="All rights reserved © Om Sai Services."
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    TextColor="LightBlue"
+                    Margin="0,5,0,0" />
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

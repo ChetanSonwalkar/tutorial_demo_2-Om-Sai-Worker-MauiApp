@@ -1,0 +1,345 @@
+<ContentPage
+    x:Class="tutorial_demo_2.Pages.AttendanceHistoryPage"
+    x:Name="AttendanceRoot"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:tutorial_demo_2.Models"
+    Title="Attendance History"
+    BackgroundColor="#F5F7FB">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto"
+          Padding="12"
+          RowSpacing="10">
+
+        <Border Grid.Row="0"
+                BackgroundColor="#3157D5"
+                StrokeThickness="0"
+                Padding="15"
+                StrokeShape="RoundRectangle 14">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Attendance History"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                    <Label Text="Select any date to view attendance"
+                           FontSize="12"
+                           TextColor="#E0E7FF" />
+                </VerticalStackLayout>
+
+                <Button Grid.Column="1"
+                        Text="Refresh"
+                        FontSize="12"
+                        Padding="12,7"
+                        BackgroundColor="#2446B5"
+                        TextColor="White"
+                        CornerRadius="9"
+                        Command="{Binding LoadAttendanceCommand}" />
+            </Grid>
+        </Border>
+
+
+        <Border Grid.Row="1"
+        BackgroundColor="White"
+        Stroke="#E2E8F0"
+        StrokeThickness="1"
+        Padding="10"
+        StrokeShape="RoundRectangle 14">
+
+            <Grid ColumnDefinitions="*,Auto"
+          ColumnSpacing="6"
+          VerticalOptions="Center">
+
+                <VerticalStackLayout Grid.Column="0"
+                             Spacing="5"
+                             VerticalOptions="Center">
+
+                    <Label Text="Choose Attendance Date"
+                   FontSize="11"
+                   FontAttributes="Bold"
+                   TextColor="#64748B"
+                   LineBreakMode="TailTruncation" />
+
+                    <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}"
+                        Format="dd MMM yyyy"
+                        FontSize="14"
+                        TextColor="#1E293B"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center"
+                        MinimumWidthRequest="130" />
+
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Grid.Column="1"
+                               Spacing="5"
+                               VerticalOptions="Center">
+
+                    <Button Text="‹"
+                    FontSize="23"
+                    WidthRequest="38"
+                    HeightRequest="40"
+                    Padding="0"
+                    BackgroundColor="#EEF2FF"
+                    TextColor="#3157D5"
+                    CornerRadius="9"
+                    Command="{Binding PreviousMonthCommand}" />
+
+                    <Button Text="›"
+                    FontSize="23"
+                    WidthRequest="38"
+                    HeightRequest="40"
+                    Padding="0"
+                    BackgroundColor="#EEF2FF"
+                    TextColor="#3157D5"
+                    CornerRadius="9"
+                    Command="{Binding NextMonthCommand}" />
+
+                </HorizontalStackLayout>
+
+            </Grid>
+        </Border>
+
+
+        <Border Grid.Row="2"
+                BackgroundColor="White"
+                Stroke="#E2E8F0"
+                StrokeThickness="1"
+                Padding="10"
+                StrokeShape="RoundRectangle 14">
+
+            <Grid RowDefinitions="Auto,Auto,*"
+                  RowSpacing="10">
+
+                <Label Grid.Row="0"
+                       Text="{Binding MonthTitle}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#1E293B"
+                       HorizontalTextAlignment="Center" />
+
+                <Grid Grid.Row="1"
+                      ColumnDefinitions="*,*,*,*,*,*,*">
+                    <Label Text="Mon" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                    <Label Grid.Column="1" Text="Tue" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                    <Label Grid.Column="2" Text="Wed" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                    <Label Grid.Column="3" Text="Thu" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                    <Label Grid.Column="4" Text="Fri" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                    <Label Grid.Column="5" Text="Sat" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                    <Label Grid.Column="6" Text="Sun" HorizontalTextAlignment="Center" TextColor="#64748B" FontSize="11" />
+                </Grid>
+
+                <CollectionView Grid.Row="2"
+                                ItemsSource="{Binding CalendarDays}"
+                                SelectionMode="None"
+                                VerticalScrollBarVisibility="Never">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="7"
+                                         HorizontalItemSpacing="4"
+                                         VerticalItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CalendarDayItem">
+                            <Button Text="{Binding DayNumber}"
+                                    HeightRequest="38"
+                                    Padding="0"
+                                    Margin="1"
+                                    FontSize="13"
+                                    CornerRadius="9"
+                                    IsEnabled="{Binding IsEnabled}"
+                                    BackgroundColor="{Binding DayBackgroundColor}"
+                                    TextColor="{Binding DayTextColor}"
+                                    BorderColor="{Binding DayBorderColor}"
+                                    BorderWidth="1"
+                                    Command="{Binding Source={x:Reference AttendanceRoot}, Path=BindingContext.SelectDayCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="3"
+                BackgroundColor="White"
+                Stroke="#E2E8F0"
+                StrokeThickness="1"
+                Padding="12"
+                StrokeShape="RoundRectangle 14">
+
+            <VerticalStackLayout Spacing="8">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Attendance Details"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#1E293B" />
+
+                    <Label Grid.Column="1"
+                           Text="{Binding SelectedStatusText}"
+                           FontSize="11"
+                           FontAttributes="Bold"
+                           TextColor="#3157D5"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <Label Text="{Binding SelectedDateText}"
+                       FontSize="12"
+                       TextColor="#64748B" />
+
+                <Grid ColumnDefinitions="*,*,*"
+                      ColumnSpacing="8">
+
+                    <VerticalStackLayout Spacing="3">
+                        <Label Text="In Time"
+                               FontSize="11"
+                               TextColor="#64748B" />
+                        <Label Text="{Binding SelectedInTime}"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#16A34A" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label Text="Out Time"
+                               FontSize="11"
+                               TextColor="#64748B" />
+                        <Label Text="{Binding SelectedOutTime}"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#DC2626" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2" Spacing="3">
+                        <Label Text="Working Hours"
+                               FontSize="11"
+                               TextColor="#64748B" />
+                        <Label Text="{Binding SelectedWorkingHours}"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#3157D5" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Label Text="{Binding ErrorMessage}"
+                       FontSize="11"
+                       TextColor="#DC2626"
+                       LineBreakMode="WordWrap" />
+
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.RowSpan="4"
+              IsVisible="{Binding IsBusy}"
+              BackgroundColor="#66000000"
+              InputTransparent="False">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="8">
+                <ActivityIndicator IsRunning="True"
+                                   Color="White"
+                                   WidthRequest="40"
+                                   HeightRequest="40" />
+                <Label Text="Loading attendance..."
+                       TextColor="White"
+                       FontAttributes="Bold" />
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tutorial_demo_2.Pages.AttendanceHistoryPage"
+             Title="🕒 Attendance History"
+             BackgroundColor="#E0F7FA">
+
+    <Grid Padding="20">
+        --><!-- Grid Row Definitions --><!--
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            --><!-- Activity Indicator --><!--
+            <RowDefinition Height="*" />
+            --><!-- CollectionView (Scrollable) --><!--
+        </Grid.RowDefinitions>
+
+        --><!-- Activity Indicator --><!--
+        <ActivityIndicator 
+            IsRunning="{Binding IsBusy}" 
+            IsVisible="{Binding IsBusy}" 
+            Color="#0097A7" 
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+        --><!-- CollectionView (Ensuring Scrollability) --><!--
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding AttendanceRecords}"
+                        EmptyView="No attendance records found."
+                        BackgroundColor="Transparent">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="15"
+                           Margin="10"
+                           CornerRadius="10"
+                           BackgroundColor="{Binding OutTime, Converter={StaticResource OutTimeToColorConverter}}"                               
+                           BorderColor="#80DEEA" 
+                           HasShadow="True">
+                        <Grid ColumnDefinitions="*,*,*,*" 
+                              RowDefinitions="Auto,Auto">
+                            --><!-- CreatedAt --><!--
+                            <Label Text="{Binding CreatedAt}"
+                                   FontSize="14"
+                                   TextColor="#0097A7" 
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   VerticalOptions="Center" />
+
+                            --><!-- InTime --><!--
+                            <Label Text="{Binding InTime}"
+                                   FontSize="14"
+                                   TextColor="#0097A7" 
+                                   Grid.Column="1"
+                                   Grid.Row="0"
+                                   VerticalOptions="Center" />
+
+                            --><!-- OutTime --><!--
+                            <Label Text="{Binding OutTime}"
+                                   FontSize="14"
+                                   TextColor="#0097A7" 
+                                   Grid.Column="2"
+                                   Grid.Row="0"
+                                   VerticalOptions="Center" />
+
+                            --><!-- WorkingHrs --><!--
+                            <Label Text="{Binding WorkingHrs}"
+                                   FontSize="14"
+                                   TextColor="#0097A7" 
+                                   Grid.Column="3"
+                                   Grid.Row="0"
+                                   VerticalOptions="Center" />
+
+                            --><!-- Divider --><!--
+                            <BoxView HeightRequest="1"
+                                     BackgroundColor="#80DEEA" 
+                                     Grid.ColumnSpan="4"
+                                     Grid.Row="1"
+                                     Margin="0,10,0,0" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>-->
+
+
+
+
+

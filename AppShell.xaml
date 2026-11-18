@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="tutorial_demo_2.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:tutorial_demo_2"
+    xmlns:pages="clr-namespace:tutorial_demo_2.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="tutorial_demo_2"
+  Shell.TabBarBackgroundColor="#E0F7FA"
+    Shell.TabBarUnselectedColor="#80DEEA"
+    Shell.TabBarDisabledColor="#B2EBF2"
+    Shell.TabBarTitleColor="#0097A7"
+    Shell.ForegroundColor="#0097A7"
+    Shell.UnselectedColor="#80DEEA"
+    >
+
+
+    <ShellContent
+        
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+
+    <ShellContent
+        Title="LoginPage"
+        ContentTemplate="{DataTemplate pages:LoginPage}"
+        Route="LoginPage" />
+
+    <ShellContent
+        Title="Profile"
+        ContentTemplate="{DataTemplate pages:ProfilePage}"
+        Route="ProfilePage" />
+    
+    <ShellContent
+        Title="ChangePasswordPage"
+        ContentTemplate="{DataTemplate pages:ChangePasswordPage}"
+        Route="ChangePasswordPage" />
+
+
+    <ShellContent
+        Title="ChangeProfileImagePage"
+        ContentTemplate="{DataTemplate pages:ChangeProfileImagePage}"
+        Route="ChangeProfileImagePage" />
+
+
+    
+    <TabBar>    
+    <ShellContent
+        Title="Home"
+        Icon="home.svg"
+        ContentTemplate="{DataTemplate pages:DashboardPage}"
+        Route="DashboardPage" />
+
+        <ShellContent
+        Title="Sites"
+        Icon="site.svg"
+        ContentTemplate="{DataTemplate pages:SiteListPage}"
+         IsVisible="{Binding IsSiteListVisible}"
+
+        Route="SiteListPage" />
+
+        
+
+        <ShellContent
+        Title="Attendance"
+        Icon="attendance.svg"
+        ContentTemplate="{DataTemplate pages:AttendancePage}"
+         IsVisible="{Binding IsAttendanceVisible}"
+        Route="AttendancePage" />
+
+        <ShellContent
+        Title="Leave"
+        Icon="leave.svg"
+        ContentTemplate="{DataTemplate pages:LeavePage}"
+        Route="LeavePage" />
+
+        <!--<ShellContent
+        Title="Salary"
+        Icon="salary.svg"
+        ContentTemplate="{DataTemplate pages:SalaryPage}"
+        Route="SalaryPage" />-->
+
+    </TabBar>
+
+    <ShellContent
+        Title="UserLists"
+        ContentTemplate="{DataTemplate pages:UserList}"
+        Route="UserList" />
+    
+    <!--<ShellContent
+        Title="SiteListPage"
+        ContentTemplate="{DataTemplate pages:SiteListPage}"
+        Route="SiteListPage" />-->
+
+
+</Shell>

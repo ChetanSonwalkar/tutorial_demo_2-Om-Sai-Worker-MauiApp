@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tutorial_demo_2.Pages.SalaryPage"
+             Title="💰 Salary">
+
+    <!-- Background Gradient -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#87CEEB" Offset="0.0"/>
+            <!-- Light Sky Blue -->
+            <GradientStop Color="#ADD8E6" Offset="0.5"/>
+            <!-- Light Blue -->
+            <GradientStop Color="#FFFFFF" Offset="1.0"/>
+            <!-- White -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+        <!-- Icon or Image -->
+        <Image Source="hourglass_icon.png" 
+            WidthRequest="100"
+               HeightRequest="100"
+               HorizontalOptions="Center" />
+
+            <!-- "Coming Soon" Text -->
+            <Label Text="Coming Soon..."
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="#0097A7" 
+                HorizontalOptions="Center" />
+
+                <!-- Subtitle Text -->
+                <Label Text="We're working on something awesome!"
+               FontSize="18"
+               TextColor="#666666" 
+                    HorizontalOptions="Center" />
+
+                    <!-- Progress Bar (Optional) -->
+                    <ProgressBar Progress="0.5" 
+                        ProgressColor="#0097A7"
+                        WidthRequest="200"
+                     HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,33 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:tutorial_demo_2"
+             xmlns:converters="clr-namespace:tutorial_demo_2.Converters"
+             xmlns:services="clr-namespace:tutorial_demo_2.Services"
+             
+             x:Class="tutorial_demo_2.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--<converters:InvertedBooleanConverter x:Key="BoolInvert"/>-->
+            <converters:OutTimeToColorConverter x:Key="OutTimeToColorConverter" />
+            <converters:OutTimeToTextColorConverter x:Key="OutTimeToTextColorConverter" />
+            <converters:SelectedWorkerConverter x:Key="SelectedWorkerConverter"/>
+            <converters:TupleConverter x:Key="TupleConverter" />
+            <converters:NullToDefaultTextConverter x:Key="NullToDefaultTextConverter"/>
+            <converters:StatusColorConverter x:Key="StatusColorConverter"/>
+            <converters:StatusBackgroundConverter x:Key="StatusBackgroundConverter"/>
+            <converters:ImageUrlConverter x:Key="ImageUrlConverter"/>
+            <services:WorkingHrsToTimeConverter x:Key="WorkingHrsToTimeConverter"/>
+
+            <converters:InvertedBooleanConverter x:Key="InvertedBoolConverter" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

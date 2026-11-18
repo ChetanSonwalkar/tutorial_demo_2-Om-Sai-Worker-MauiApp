@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tutorial_demo_2.Pages.UserList"
+             Title="UserList">
+    <VerticalStackLayout>
+
+        <ListView x:Name="listView" HasUnevenRows="True" SeparatorColor="Red">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <!--<ViewCell>
+                        <StackLayout BackgroundColor="Beige" Padding="20">
+                            <Label Text="{Binding Username }" TextColor="blue" FontAttributes="Bold" Margin="10" HorizontalOptions="Start" />
+                            <Label Text="{Binding Password }" TextColor="red" FontAttributes="Bold" Margin="10" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>-->
+                    <TextCell Text="{Binding Username }" Detail="{Binding Password }" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </VerticalStackLayout>
+</ContentPage>

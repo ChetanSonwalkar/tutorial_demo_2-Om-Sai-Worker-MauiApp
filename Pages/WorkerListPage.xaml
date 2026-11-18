@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="tutorial_demo_2.Pages.WorkerListPage"
+             xmlns:vm="clr-namespace:tutorial_demo_2.ViewModels"
+             Title="Worker List"
+             BackgroundColor="SkyBlue">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#87CEEB" Offset="0.0"/>
+                <!-- Light Sky Blue -->
+                <GradientStop Color="#ADD8E6" Offset="0.5"/>
+                <!-- Light Blue -->
+                <GradientStop Color="#FFFFFF" Offset="1.0"/>
+                <!-- White -->
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Label Text="Select a Worker"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="White"
+               Margin="0,10,0,10"
+               Grid.Row="0"
+               Padding="20,0,20,0"/>
+
+        <SearchBar Placeholder="Search Worker..."
+                   Text="{Binding SearchText, Mode=TwoWay}"
+                   TextColor="Black"
+                   BackgroundColor="White"
+                   PlaceholderColor="Gray"
+                   FontSize="16"
+                   HeightRequest="40"
+                   Margin="20,0,20,10"
+                   Grid.Row="1"/>
+
+        <ActivityIndicator IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}"
+                           Color="DodgerBlue"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="50"
+                           WidthRequest="50"
+                           Margin="0,10,0,10"
+                           Grid.Row="2"/>
+
+
+        <CollectionView Grid.Row="3"
+                ItemsSource="{Binding FilteredWorkers}"
+                SelectionMode="None"
+                BackgroundColor="Transparent"
+                VerticalOptions="Fill"
+                ItemsLayout="VerticalList">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="30"
+                             Spacing="10"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+                    <Label Text="No Workers Found"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+
+                    <Label Text="Please check the site or search again."
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="15"
+                   Padding="10"
+                   Margin="5"
+                   HasShadow="True"
+                   BackgroundColor="White">
+
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                      Padding="10">
+
+                            <Frame Grid.Column="0"
+                           CornerRadius="25"
+                           Padding="0"
+                           HeightRequest="50"
+                           WidthRequest="50"
+                           IsClippedToBounds="True">
+
+                                <Image Source="{Binding ProfileImage}"
+                               Aspect="AspectFill"
+                               HeightRequest="50"
+                               WidthRequest="50"/>
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                         VerticalOptions="Center"
+                                         Padding="10,0">
+
+                                <Label Text="{Binding Name}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
+
+                                <Label Text="{Binding WorkmanId}"
+                               FontSize="12"
+                               TextColor="Gray"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2"
+                            Text="Select"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                              Path=BindingContext.SelectWorkerCommand}"
+                            CommandParameter="{Binding .}"
+                            BackgroundColor="DodgerBlue"
+                            TextColor="White"
+                            CornerRadius="10"
+                            VerticalOptions="Center"
+                            FontSize="13"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

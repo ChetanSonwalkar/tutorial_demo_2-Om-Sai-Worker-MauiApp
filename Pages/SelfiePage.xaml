@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="tutorial_demo_2.Pages.SelfiePage"
+    Title="Selfie Attendance"
+    BackgroundColor="#101827">
+
+    <Grid Padding="15"
+          RowDefinitions="Auto,*,Auto">
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="4"
+            Margin="0,5,0,12">
+
+            <Label
+                Text="Selfie Attendance"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalOptions="Center"/>
+
+            <Label
+                Text="Position your face inside the camera"
+                FontSize="13"
+                TextColor="#B9C7D9"
+                HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+        <Border
+            Grid.Row="1"
+            BackgroundColor="#202D40"
+            Stroke="#34445D"
+            StrokeThickness="1"
+            Padding="4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+
+            <Grid>
+
+                <toolkit:CameraView
+                    x:Name="MyCamera"
+                    IsVisible="True"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    MediaCaptured="MyCamera_MediaCaputure"
+                    CameraFlashMode="Off"/>
+
+                <Grid
+                    x:Name="MyImageBox"
+                    IsVisible="False"
+                    BackgroundColor="#202D40">
+
+                    <Image
+                        x:Name="MyImage"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"/>
+
+                </Grid>
+
+                <ActivityIndicator
+                    x:Name="CameraLoading"
+                    IsVisible="False"
+                    IsRunning="False"
+                    Color="#55B7FF"
+                    WidthRequest="45"
+                    HeightRequest="45"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+
+                <Grid
+                    x:Name="CaptureLoadingOverlay"
+                    IsVisible="False"
+                    BackgroundColor="#CC101827"
+                    InputTransparent="False">
+
+                    <VerticalStackLayout
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Spacing="12">
+
+                        <ActivityIndicator
+                            IsRunning="True"
+                            Color="#55B7FF"
+                            WidthRequest="55"
+                            HeightRequest="55"/>
+
+                        <Label
+                            Text="Processing selfie..."
+                            TextColor="White"
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"/>
+
+                        <Label
+                            Text="Please wait"
+                            TextColor="#B9C7D9"
+                            FontSize="12"
+                            HorizontalOptions="Center"/>
+
+                    </VerticalStackLayout>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <VerticalStackLayout
+            Grid.Row="2"
+            Spacing="10"
+            Margin="0,14,0,5">
+
+            <Grid
+                x:Name="CameraButtons"
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="8">
+
+                <Button
+                    x:Name="CaptureButton"
+                    Grid.Column="0"
+                    Text="Capture"
+                    FontAttributes="Bold"
+                    FontSize="13"
+                    BackgroundColor="#1687E8"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    Clicked="Button_Clicked"/>
+
+                <Button
+                    x:Name="flashToggleButton"
+                    Grid.Column="1"
+                    Text="Flash Off"
+                    FontSize="13"
+                    BackgroundColor="#34445D"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    Clicked="Button_Flash_Clicked"/>
+
+                <Button
+                    x:Name="cameraToggleButton"
+                    Grid.Column="2"
+                    Text="Flip Camera"
+                    FontSize="13"
+                    BackgroundColor="#34445D"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    Clicked="ToggleCamera_Clicked"/>
+
+            </Grid>
+
+            <Grid
+                x:Name="SubmitButtons"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="10"
+                IsVisible="False">
+
+                <Button
+                    Grid.Column="0"
+                    Text="Retake"
+                    FontAttributes="Bold"
+                    BackgroundColor="#34445D"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    Clicked="Retake_Button"/>
+
+                <Button
+                    x:Name="SubmitAttendanceButton"
+                    Grid.Column="1"
+                    Text="Submit Attendance"
+                    FontAttributes="Bold"
+                    BackgroundColor="#159B65"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    Command="{Binding SubmitAttendanceCommand}"/>
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+        <Grid
+            Grid.RowSpan="3"
+            x:Name="SubmitLoadingOverlay"
+            IsVisible="{Binding IsSubmitting}"
+            BackgroundColor="#CC101827"
+            InputTransparent="False"
+            ZIndex="100">
+
+            <Border
+                BackgroundColor="#202D40"
+                Stroke="#34445D"
+                StrokeThickness="1"
+                Padding="25"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout
+                    Spacing="14"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                    <ActivityIndicator
+                        IsRunning="{Binding IsSubmitting}"
+                        Color="#55B7FF"
+                        WidthRequest="55"
+                        HeightRequest="55"/>
+
+                    <Label
+                        Text="Submitting Attendance..."
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"/>
+
+                    <Label
+                        Text="Please wait. Do not close the app."
+                        TextColor="#B9C7D9"
+                        FontSize="12"
+                        HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
+    <!--<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="tutorial_demo_2.Pages.SelfiePage"
+             Title="Selfie Attendance" >
+
+    --><!--<ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="❌ Close" Order="Primary" Priority="0" Command="{Binding BackNavigationCommand}" />
+
+    </ContentPage.ToolbarItems>--><!--
+
+    <ScrollView>
+        <Grid  RowDefinitions="Auto,Auto,Auto,Auto">
+            <Grid  x:Name="MyImageBox" 
+                   BackgroundColor="SkyBlue"
+                   Grid.Row="0"
+                   IsVisible="False">
+                <Image
+                    x:Name="MyImage"
+                    Aspect="AspectFill"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="10"/>
+            </Grid>
+
+            <toolkit:CameraView
+                x:Name="MyCamera" 
+                Grid.ColumnSpan="3" 
+                Grid.Row="0"
+                MediaCaptured="MyCamera_MediaCaputure"
+                SelectedCamera="{Binding SelectedCamera}"
+                ZoomFactor="{Binding CurrentZoom}"
+                CameraFlashMode="{Binding FlashMode}" />
+            
+            <Grid x:Name="CameraButtons" ColumnDefinitions="*,*,*" Grid.Row="1" Padding="10">
+                <Button
+                    x:Name="CaptureButton"                    
+                    Grid.Column="0"
+                    Margin="1"
+                    Clicked="Button_Clicked"
+                    Text="Capture Image" />
+                <Button
+                    x:Name="flashToggleButton"
+                    Grid.Column="1"
+                    Margin="1"
+                    Clicked="Button_Flash_Clicked"
+                    Text="🔅" />
+                <Button
+                    x:Name="cameraToggleButton"
+                    Grid.Column="2"
+                    Margin="1"
+                    Clicked="ToggleCamera_Clicked"
+                    Text="Camera Flip" />
+
+            </Grid>
+            <Grid x:Name="SubmitButtons" ColumnDefinitions="*,*" Grid.Row="2" Padding="10" >
+                <Button
+                Grid.Column="1"
+                Margin="1"
+                Clicked="Retake_Button"
+                Text="🔄 Retake" />
+                <Button
+                Grid.Column="0"
+                Margin="1"  
+                Text="💾 Submit"
+                Command="{Binding SubmitAttendanceCommand}" />
+
+            </Grid>
+ 
+
+        </Grid>
+
+
+
+    </ScrollView>
+
+</ContentPage>-->
