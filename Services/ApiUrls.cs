@@ -25,7 +25,7 @@ namespace tutorial_demo_2.Services
 		/*
 		public static string ImageUrl => "http://192.168.0.6:85";   //  MVC URL as Image URL
 		public const string Base = "http://192.168.0.6:81";
-		/ */
+		/ */           
 
 		public static string BaseUrl => $"{Base}/api3/";
 
